@@ -1,7 +1,5 @@
-@font-face {
-    font-family: Game_Over;
-    src: url(./fonts/game_over.ttf);
-}
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 
 html, body {
     background-color: black;
@@ -57,20 +55,26 @@ ui {
     transform: translate(20px, 20px);
     font-family: 'VT323', monospace;
 }
+
+@font-face {
+    font-family: "GameOver";
+    src: url(./fonts/GameOver.ttf) format("truetype");
+}
+
 endscreen div {
-    font-family: Game_Over;
-    font-size: 3em;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1em;
     padding-top: 26vh;
     width: 100vw;
     text-align: center;
 }
 
 endscreen button {
-    font-family: 'VT323', monospace;
-    font-size: 1.2em;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.5em;
     margin-top: 10px;
-    margin-left: calc(50vw - 100px);
-    background-color: green;
+    margin-left: calc(50vw - 150px);
+    background-color: black;
     color: white;
     padding: 12px;
     cursor: pointer;

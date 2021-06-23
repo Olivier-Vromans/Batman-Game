@@ -92,17 +92,16 @@ export class Game{
         s.remove()
         this._superheroes = this._superheroes.filter(hero => hero != s)
         if(this._superheroes.length < 1){
-            this.ui.clear()
-            this.endScreen = new EndScreen(this.ui.score)
+            this.ui.clear()            
             for(let enemy of this.enemies){
                 enemy.remove()
-            }
+            }            
             for(let bullet of this.bullets){
                 bullet.remove()
             }
             this.bullets = []
             this.enemies = []
-
+            this.endScreen = new EndScreen(this.ui.score)
         }
     }
 

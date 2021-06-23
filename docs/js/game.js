@@ -67,7 +67,6 @@ export class Game {
         this._superheroes = this._superheroes.filter(hero => hero != s);
         if (this._superheroes.length < 1) {
             this.ui.clear();
-            this.endScreen = new EndScreen(this.ui.score);
             for (let enemy of this.enemies) {
                 enemy.remove();
             }
@@ -76,6 +75,7 @@ export class Game {
             }
             this.bullets = [];
             this.enemies = [];
+            this.endScreen = new EndScreen(this.ui.score);
         }
     }
     addBullet(b) {
