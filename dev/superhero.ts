@@ -58,9 +58,7 @@ export class Superhero extends Entity{
     }
 
     onKeyDown(e: KeyboardEvent): void {
-        // log the keyboard
-        // console.log(e.key)
-
+        // log the keyboard inputs
         // Check if the key in the event (e.key) matches the desired input
         switch (e.key) {
             // When the "Left" key is pressed
