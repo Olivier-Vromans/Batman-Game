@@ -1,2 +1,2 @@
 # Batman-Game
-url(https://olivier-vromans.github.io/Batman-Game/)
+[link to game](https://olivier-vromans.github.io/Batman-Game/)
