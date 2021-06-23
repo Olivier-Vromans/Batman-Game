@@ -4,7 +4,7 @@ export class Superhero extends Entity {
         super(tagName);
         this.verticalSpeed = 0;
         this.horizontalSpeed = 0;
-        this.lives = 8;
+        this.lives = 4;
         this.frame = 0;
         this.frameWidth = 64;
         this.enemyFPS = 0;
