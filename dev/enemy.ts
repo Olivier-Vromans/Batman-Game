@@ -6,10 +6,10 @@ export class Enemy extends Entity {
     private game : Game
 
     //sprite
-    private animFrames : number = 8
-    private frame : number = 0
-    private frameWidth : number  = 64
-    private enemyFPS : number  = 0
+    animFrames = 8
+    frame = 0
+    frameWidth = 64
+    enemyFPS = 0
 
 
     public getBoundingRect() : DOMRect {
@@ -35,23 +35,34 @@ export class Enemy extends Entity {
 
     update(){
         // Add the vertical speed to the y-value
-        this.y += 0
-        this.x += -2
+        this.x += -2       
         super.update()
 
         //sprite
-        this.enemyFPS++
-        if(this.enemyFPS % 10 == 0) this.frame++
-        if(this.enemyFPS % 60 == 0) this.shoot()
+        this.runningSprite()
+
+        //Let enemy shoot
+        if(this.fps % 60 == 0) this.shoot()
+    }
+
+    private runningSprite(){
+        if(this.fps % 5 == 0) this.frame++
         if(this.frame > this.animFrames) this.frame = 0
         let pos = 16 - (this.frame * this.frameWidth)
         this.div.style.backgroundPosition = `${pos}px 0px`
     }
 
+    private shootingSprite(){
+        
+    }
+
     private shoot(){
         if(Math.random() < 0.2) {
-        this.game.addBullet(new Bullet("bullet", this))
+
+            this.game.addBullet(new Bullet("bullet", this))
         }
     }
 
+
 }
+

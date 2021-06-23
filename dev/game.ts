@@ -76,7 +76,6 @@ export class Game{
                 }
             }
         }        
-        //Update ui
         
         requestAnimationFrame(() => this.gameLoop())
     }

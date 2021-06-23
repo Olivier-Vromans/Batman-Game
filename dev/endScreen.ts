@@ -3,6 +3,7 @@ import { Game } from "./game.js";
 import { UI } from "./ui.js";
 
 export class EndScreen extends Entity{
+    //TODO Fix double End Screen
     private scoreField : HTMLElement 
     private nextGameButton : HTMLElement
     private ui : UI
