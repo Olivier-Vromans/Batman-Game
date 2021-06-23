@@ -8,7 +8,7 @@ export class Superhero extends Entity{
     private horizontalSpeed: number = 0
     private keys: string[]
     public tagName : string
-    public lives : number = 1
+    public lives : number = 3
     private game : Game
 
 

@@ -4,7 +4,7 @@ export class Superhero extends Entity {
         super(tagName);
         this.verticalSpeed = 0;
         this.horizontalSpeed = 0;
-        this.lives = 1;
+        this.lives = 3;
         window.addEventListener("keydown", (e) => this.onKeyDown(e));
         window.addEventListener("keyup", (e) => this.onKeyUp(e));
         this.tagName = tagName;
