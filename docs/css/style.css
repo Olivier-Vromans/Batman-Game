@@ -1,0 +1,77 @@
+@font-face {
+    font-family: Game_Over;
+    src: url(./fonts/game_over.ttf);
+}
+
+html, body {
+    background-color: black;
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    color: white;
+    font-size: 1.5em;
+}
+
+endscreen, batman, catwoman, thugs, bullet, background {
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+}
+
+background {
+    background-image: url(../images/gotham.gif);
+    width: 100vw;
+    height: 100vw;
+    background-size: 100vw 100vh;
+    background-repeat: repeat-x;
+}
+
+batman{
+    /* TODO Change Batman to Sprite Sheet */
+    background-image: url(../images/ss_batman.png);
+    width: 58px; height: 77px; 
+    text-align: center;
+}
+catwoman{
+    /* TODO Change Batman to Sprite Sheet */
+    background-image: url(../images/ss_catwomen.png);
+    width: 29px; height: 57px; 
+    text-align: center;
+}
+thugs{
+    /* TODO Change Batman to Sprite Sheet */
+    background-image: url(../images/ss_thugs_running.png);
+    width: 64px; height: 64px; 
+    text-align: center;
+}
+bullet{
+    background-image: url("../images/Bullet.png");
+    background-size: contain;
+    /* text-align: center; */
+    width: 20px; height: 6px; 
+}
+ui {
+    position:absolute;
+    transform: translate(20px, 20px);
+    font-family: 'VT323', monospace;
+}
+endscreen div {
+    font-family: Game_Over;
+    font-size: 3em;
+    padding-top: 26vh;
+    width: 100vw;
+    text-align: center;
+}
+
+endscreen button {
+    font-family: 'VT323', monospace;
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-left: calc(50vw - 100px);
+    background-color: green;
+    color: white;
+    padding: 12px;
+    cursor: pointer;
+}
