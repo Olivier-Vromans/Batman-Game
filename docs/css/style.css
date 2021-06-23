@@ -53,7 +53,7 @@ bullet{
 ui {
     position:absolute;
     transform: translate(20px, 20px);
-    font-family: 'VT323', monospace;
+    font-size: 1rem;
 }
 
 @font-face {
