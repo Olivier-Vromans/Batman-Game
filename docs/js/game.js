@@ -8,7 +8,7 @@ export class Game {
         this.enemies = [];
         this.bullets = [];
         console.log("Game was Created!");
-        for (let e = 0; e < 3; e++) {
+        for (let e = 0; e < 2; e++) {
             this.enemies.push(new Enemy("thugs", this));
         }
         this.superheroes.push(new Superhero(this, "batman", ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]));
