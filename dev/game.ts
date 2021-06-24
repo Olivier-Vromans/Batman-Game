@@ -17,7 +17,7 @@ export class Game{
         console.log("Game was Created!")
 
         //Ceate Enemies
-        for (let e = 0; e < 3; e++) {
+        for (let e = 0; e < 2; e++) {
             this.enemies.push(new Enemy("thugs", this))
         }
 
