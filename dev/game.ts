@@ -17,7 +17,7 @@ export class Game{
         console.log("Game was Created!")
 
         //Ceate Enemies
-        for (let e = 0; e < 2; e++) {
+        for (let e = 0; e < 3; e++) {
             this.enemies.push(new Enemy("thugs", this))
         }
 
@@ -60,23 +60,23 @@ export class Game{
         }
 
         for(let s of this.superheroes){
-            for(let bullet of this.bullets){
-                if(this.checkCollision(s.getBoundingRect(), bullet.getBoundingRect())){
-                    console.log("bullet hit superhero");
-                    bullet.remove()
-                    this.bullets = this.bullets.filter(b => b != bullet)    
-                    s.hit()
-                    this.ui.update()
+            if(!s.dead){
+                for(let bullet of this.bullets){
+                
+                    if(this.checkCollision(s.getBoundingRect(), bullet.getBoundingRect())){
+                        bullet.remove()
+                        this.bullets = this.bullets.filter(b => b != bullet)    
+                        s.hit()
+                        this.ui.update()
+                    }
                 }
-            }
-            for(let e of this.enemies){
-                if(this.checkCollision(s.getBoundingRect(), e.getBoundingRect())){
-                    // console.log("Superhero hit enemy");
-                    this.removeEnemy(e)                   
-                }
+                for(let e of this.enemies){
+                    if(this.checkCollision(s.getBoundingRect(), e.getBoundingRect())){
+                        this.removeEnemy(e)                   
+                    }
+                }   
             }
         }        
-        //Update ui
         
         requestAnimationFrame(() => this.gameLoop())
     }
@@ -101,7 +101,11 @@ export class Game{
             }
             this.bullets = []
             this.enemies = []
-            this.endScreen = new EndScreen(this.ui.score)
+            console.log(this._superheroes.length);
+            
+            if (!this.endScreen) {
+                this.endScreen = new EndScreen(this.ui.score) 
+            }
         }
     }
 

@@ -3,6 +3,14 @@ export class Entity {
         this.x = 0;
         this.y = 0;
         this.scale = 1;
+        this.animFrames = 0;
+        this.frame = 0;
+        this.frameWidth = 0;
+        this.frameHeigt = 0;
+        this.startpos = 0;
+        this.fps = 0;
+        this.row = 0;
+        this.pos = 0;
         this.create(tagName);
     }
     create(tagName) {
@@ -12,6 +20,7 @@ export class Entity {
     }
     update() {
         this.div.style.transform = `translate(${this.x}px, ${this.y}px) scaleX(${this.scale})`;
+        this.fps++;
     }
     remove() {
         this.div.remove();

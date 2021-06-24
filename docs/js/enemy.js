@@ -8,8 +8,9 @@ export class Enemy extends Entity {
         this.frameWidth = 64;
         this.enemyFPS = 0;
         this.x = window.innerWidth + 20 + Math.random() * 400;
-        this.y = 400;
+        this.y = 590;
         this.game = g;
+        this.shoot();
         this.update();
     }
     getBoundingRect() {
@@ -22,18 +23,21 @@ export class Enemy extends Entity {
         return this.y;
     }
     update() {
-        this.y += 0;
         this.x += -2;
         super.update();
-        this.enemyFPS++;
-        if (this.enemyFPS % 10 == 0)
-            this.frame++;
-        if (this.enemyFPS % 60 == 0)
+        this.runningSprite();
+        if (this.fps % 60 == 0)
             this.shoot();
+    }
+    runningSprite() {
+        if (this.fps % 5 == 0)
+            this.frame++;
         if (this.frame > this.animFrames)
             this.frame = 0;
         let pos = 16 - (this.frame * this.frameWidth);
         this.div.style.backgroundPosition = `${pos}px 0px`;
+    }
+    shootingSprite() {
     }
     shoot() {
         if (Math.random() < 0.2) {

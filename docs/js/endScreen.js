@@ -3,11 +3,10 @@ import { Game } from "./game.js";
 export class EndScreen extends Entity {
     constructor(s) {
         super("endscreen");
-        console.log("We are Doomed");
         const gameElement = document.querySelector('endscreen');
         this.scoreField = document.createElement("div");
         gameElement.appendChild(this.scoreField);
-        let str = `You Scorred: ${s}`;
+        let str = `Your total Score: ${s}`;
         this.scoreField.innerHTML = str;
         this.nextGameButton = document.createElement("button");
         this.nextGameButton.innerText = "Start Next Game";
