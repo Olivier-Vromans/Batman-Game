@@ -5,15 +5,14 @@ export class Superhero extends Entity {
         this.verticalSpeed = 0;
         this.horizontalSpeed = 0;
         this.lives = 4;
-        this.frame = 0;
-        this.frameWidth = 64;
-        this.enemyFPS = 0;
+        this.state = "idle";
+        this.dead = false;
         window.addEventListener("keydown", (e) => this.onKeyDown(e));
         window.addEventListener("keyup", (e) => this.onKeyUp(e));
         this.tagName = tagName;
         this.game = g;
         this.x = 100;
-        this.y = 400;
+        this.y = 565;
         this.keys = key;
         this.update();
     }
@@ -29,11 +28,16 @@ export class Superhero extends Entity {
         if (newy > 0 && newy + this.getBoundingRect().height < window.innerHeight) {
             this.y = newy;
         }
+        if (this.fps % 10 == 0)
+            this.frame++;
+        if (this.frame > this.animFrames)
+            this.frame = 0;
+        this.pos = this.startpos - (this.frame * this.frameWidth);
+        this.div.style.backgroundPosition = `${this.pos}px ${0 - this.row * this.frameHeigt}px`;
         super.update();
     }
     hit() {
         this.lives--;
-        this.deadSprite();
         if (this.lives < 1) {
             this.game.removeSuperhero(this);
         }
@@ -43,20 +47,32 @@ export class Superhero extends Entity {
             case this.keys[0]:
                 this.horizontalSpeed = -3;
                 this.scale = -1;
-                this.runningSprite();
+                if (this.state != "running") {
+                    this.state = "running";
+                    this.runningSprite();
+                }
                 break;
             case this.keys[1]:
                 this.horizontalSpeed = 3;
                 this.scale = 1;
-                this.runningSprite();
+                if (this.state != "running") {
+                    this.state = "running";
+                    this.runningSprite();
+                }
                 break;
             case this.keys[2]:
-                this.verticalSpeed = -5;
-                this.jumpingSprite();
+                this.verticalSpeed = -6;
+                if (this.state != "jumping") {
+                    this.state = "jumping";
+                    this.jumpingSprite();
+                }
                 break;
             case this.keys[3]:
-                this.verticalSpeed = 5;
-                this.jumpingSprite();
+                this.verticalSpeed = 6;
+                if (this.state != "jumping") {
+                    this.state = "jumping";
+                    this.jumpingSprite();
+                }
                 break;
             default:
                 break;
@@ -68,26 +84,39 @@ export class Superhero extends Entity {
             this.row = 1;
             this.animFrames = 6;
             this.frameWidth = 80;
-            if (this.fps % 1 == 0)
-                this.frame++;
-            if (this.frame > this.animFrames)
-                this.frame = 0;
-            let pos = 0 - (this.frame * this.frameWidth);
+            this.frameHeigt = 77;
             this.div.style.width = "80px";
-            this.div.style.height = "64px";
-            this.div.style.backgroundPosition = `${pos}px ${0 - this.row * 77}px`;
+            this.div.style.height = "70px";
         }
-        if (this.tagName === "catwoman")
-            console.log("Catwoman Running");
+        if (this.tagName === "catwoman") {
+            this.row = 1;
+            this.animFrames = 4;
+            this.frameWidth = 55;
+            this.frameHeigt = 66;
+            this.div.style.width = "50px";
+            this.div.style.height = "55px";
+        }
+    }
+    changeBackground() {
     }
     stadingSprite() {
         if (this.tagName === "batman") {
-            this.div.style.backgroundPosition = `0px 0px`;
+            this.row = 0;
+            this.animFrames = 0;
+            this.frameWidth = 58;
+            this.frameHeigt = 77;
+            this.startpos = 0;
             this.div.style.width = "58px";
             this.div.style.height = "77px";
         }
-        if (this.tagName === "catwoman")
-            this.div.style.backgroundPosition = `0px 0px`;
+        if (this.tagName === "catwoman") {
+            this.row = 0;
+            this.animFrames = 0;
+            this.frameWidth = 29;
+            this.frameHeigt = 57;
+            this.div.style.width = "29px";
+            this.div.style.height = "57px";
+        }
     }
     jumpingSprite() {
     }
@@ -97,14 +126,11 @@ export class Superhero extends Entity {
             this.row = 2;
             this.animFrames = 3;
             this.frameWidth = 87;
-            if (this.fps % 1 == 0)
-                this.frame++;
-            if (this.frame > this.animFrames)
-                this.frame = 0;
-            let pos = 20 - (this.frame * this.frameWidth);
+            this.frameHeigt = 77;
+            this.startpos = 20;
+            this.pos = 0;
             this.div.style.width = "87px";
             this.div.style.height = "107px";
-            this.div.style.backgroundPosition = `${pos}px ${0 - this.row * 77}px`;
         }
         if (this.tagName === "catwoman")
             console.log("Catwoman Running");
@@ -112,12 +138,22 @@ export class Superhero extends Entity {
     onKeyUp(e) {
         if (e.key == this.keys[0] || e.key == this.keys[1]) {
             this.horizontalSpeed = 0;
-            this.stadingSprite();
+            if (this.state != "idle") {
+                this.state = "idle";
+                console.log("I am standing");
+                this.stadingSprite();
+            }
         }
         if (e.key == this.keys[2] || e.key == this.keys[3]) {
             this.verticalSpeed = 0;
-            this.stadingSprite();
+            if (this.state != "idle") {
+                this.state = "idle";
+                this.stadingSprite();
+            }
         }
     }
+}
+function adjustAnimation() {
+    throw new Error("Function not implemented.");
 }
 //# sourceMappingURL=superhero.js.map

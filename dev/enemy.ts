@@ -19,10 +19,11 @@ export class Enemy extends Entity {
     constructor(tagName: string, g : Game) {
         super(tagName)
         this.x = window.innerWidth + 20 + Math.random() * 400
-        this.y = 400
+        this.y = 590 //590 for game / 200 for testing
         this.game = g
+        this.shoot()
         // console.log("Enemy was created!")  
-        this.update()
+        this.update() 
     }
 
     get valueX() : number {
@@ -41,7 +42,7 @@ export class Enemy extends Entity {
         //sprite
         this.runningSprite()
 
-        //Let enemy shoot
+        // Let enemy shoot
         if(this.fps % 60 == 0) this.shoot()
     }
 
@@ -58,9 +59,9 @@ export class Enemy extends Entity {
 
     private shoot(){
         if(Math.random() < 0.2) {
-
             this.game.addBullet(new Bullet("bullet", this))
         }
+
     }
 
 

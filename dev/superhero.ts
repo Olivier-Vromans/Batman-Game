@@ -10,14 +10,12 @@ export class Superhero extends Entity{
     public tagName : string
     public lives : number = 4
     private game : Game
-
-    //sprite
-    frame = 0
-    frameWidth = 64
-    enemyFPS = 0
+    private state : string = "idle"
+    public dead : boolean = false
+    
 
     public getBoundingRect() : DOMRect {
-        return this.div.getBoundingClientRect()
+         return this.div.getBoundingClientRect()
     }
 
     constructor(g : Game, tagName: string, key: string[]){
@@ -29,8 +27,8 @@ export class Superhero extends Entity{
         this.game = g
         // generate x and y values
         this.x = 100
-        this.y = 400
-        // console.log("SuperHero was created!")
+        this.y = 565 //565 for game / 200 for testing
+
         this.keys = key
         this.update()
     }
@@ -46,15 +44,24 @@ export class Superhero extends Entity{
         if(newy > 0 && newy + this.getBoundingRect().height < window.innerHeight){
             this.y = newy
         }
+
+
+        if(this.fps % 10 == 0) this.frame++
+        if(this.frame > this.animFrames) this.frame = 0
+        this.pos = this.startpos - (this.frame * this.frameWidth)
+        this.div.style.backgroundPosition = `${this.pos}px ${0-this.row*this.frameHeigt}px`     
+
         super.update()
     }
-
+    
     public hit(){
+        //TODO Make dead work
         this.lives--
-        this.deadSprite()
+        // this.deadSprite()
         if(this.lives < 1){
             this.game.removeSuperhero(this)
         }
+        // this.dead = true
     }
 
     onKeyDown(e: KeyboardEvent): void {
@@ -66,26 +73,38 @@ export class Superhero extends Entity{
                 // Give the vertical speed a negative value
                 this.horizontalSpeed = -3
                 this.scale = -1
-                this.runningSprite()
+                if (this.state != "running") {
+                    this.state = "running"
+                    this.runningSprite()
+                }
                 break;
             // When the "Right" key is pressed
             case this.keys[1]:
                 // Give the vertical speed a positive value
                 this.horizontalSpeed = 3
                 this.scale = 1
-                this.runningSprite()
+                if (this.state != "running") {
+                    this.state = "running"
+                    this.runningSprite()
+                }
                 break;
             // When the "Up" key is pressed
             case this.keys[2]:     
                 // Give the vertical speed a negative value
-                this.verticalSpeed = -5
-                this.jumpingSprite()
+                this.verticalSpeed = -6
+                if (this.state != "jumping") {
+                    this.state = "jumping"
+                    this.jumpingSprite()
+                }
                 break;
             // When the "Down" key is pressed
              case this.keys[3]:
                 // Give the vertical speed a positive value
-                this.verticalSpeed = 5
-                this.jumpingSprite()
+                this.verticalSpeed = 6
+                if (this.state != "jumping") {
+                    this.state = "jumping"
+                    this.jumpingSprite()
+                }
                 break;
             default:
                 break;
@@ -93,29 +112,51 @@ export class Superhero extends Entity{
     }
 
     private runningSprite() {
+        //Batman running Sprite
         if (this.tagName === "batman") {
             console.log("Batman Running")
             this.row = 1
             this.animFrames = 6
             this.frameWidth = 80
-            if(this.fps % 1 == 0) this.frame++
-            if(this.frame > this.animFrames) this.frame = 0
-            let pos = 0 - (this.frame * this.frameWidth)
+            this.frameHeigt = 77
             this.div.style.width = "80px"
-            this.div.style.height = "64px"
-            this.div.style.backgroundPosition = `${pos}px ${0-this.row*77}px`     
+            this.div.style.height = "70px"    
         }
-        // TODO Catwoman Sprite
-        if (this.tagName === "catwoman") console.log("Catwoman Running") 
+        if (this.tagName === "catwoman") {
+            // console.log("Catwoman Running")
+            this.row = 1
+            this.animFrames = 4
+            this.frameWidth = 55
+            this.frameHeigt = 66
+            this.div.style.width = "50px"
+            this.div.style.height = "55px"
+        }    
+    }
+
+    private changeBackground(){
+
     }
 
     private stadingSprite(){
+        //Batman back to Standing
         if (this.tagName === "batman") {
-            this.div.style.backgroundPosition = `0px 0px`
+            this.row = 0
+            this.animFrames = 0
+            this.frameWidth = 58
+            this.frameHeigt = 77
+            this.startpos = 0
             this.div.style.width = "58px"
             this.div.style.height = "77px"
         }
-        if (this.tagName === "catwoman") this.div.style.backgroundPosition = `0px 0px`     
+        //Batman back to Standing
+        if (this.tagName === "catwoman") {
+            this.row = 0
+            this.animFrames = 0
+            this.frameWidth = 29
+            this.frameHeigt = 57
+            this.div.style.width = "29px"
+            this.div.style.height = "57px"    
+        }    
     }
 
     private jumpingSprite(){
@@ -129,19 +170,26 @@ export class Superhero extends Entity{
             this.row = 2
             this.animFrames = 3
             this.frameWidth = 87
-            if(this.fps % 1 == 0) this.frame++
-            if(this.frame > this.animFrames) this.frame = 0
-            let pos = 20 - (this.frame * this.frameWidth)
+            this.frameHeigt = 77
+            this.startpos = 20
+            this.pos = 0
             this.div.style.width = "87px"
             this.div.style.height = "107px"
-            this.div.style.backgroundPosition = `${pos}px ${0-this.row*77}px`     
         }
         // TODO Catwoman DeadSprite
         if (this.tagName === "catwoman") console.log("Catwoman Running") 
 
         
+        
+
+        // if(this.fps % 60 == 0) this.stadingSprite()
+
+
+        //TODO After animation is done
+        // this.dead = false
         // this.x = 100
-        // this.y = 400
+        // this.y = 200
+        // this.stadingSprite()
     }
 
 
@@ -150,12 +198,23 @@ export class Superhero extends Entity{
         if(e.key == this.keys[0] || e.key == this.keys[1]){
             // Make the horizontal speed 0
             this.horizontalSpeed = 0
-            this.stadingSprite()
+            if (this.state != "idle") {
+                this.state = "idle"
+                console.log("I am standing");
+                this.stadingSprite()
+            }
         }
         if (e.key == this.keys[2] || e.key == this.keys[3]) {
             // Make the vertical speed 0
             this.verticalSpeed = 0
-            this.stadingSprite()
+            if (this.state != "idle") {
+                this.state = "idle"
+                this.stadingSprite()
+            }
         }
     }
+}
+
+function adjustAnimation() {
+    throw new Error("Function not implemented.")
 }

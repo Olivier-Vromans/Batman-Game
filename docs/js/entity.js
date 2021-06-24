@@ -6,8 +6,11 @@ export class Entity {
         this.animFrames = 0;
         this.frame = 0;
         this.frameWidth = 0;
+        this.frameHeigt = 0;
+        this.startpos = 0;
         this.fps = 0;
         this.row = 0;
+        this.pos = 0;
         this.create(tagName);
     }
     create(tagName) {

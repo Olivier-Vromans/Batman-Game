@@ -8,8 +8,9 @@ export class Enemy extends Entity {
         this.frameWidth = 64;
         this.enemyFPS = 0;
         this.x = window.innerWidth + 20 + Math.random() * 400;
-        this.y = 400;
+        this.y = 590;
         this.game = g;
+        this.shoot();
         this.update();
     }
     getBoundingRect() {

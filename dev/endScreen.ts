@@ -3,7 +3,6 @@ import { Game } from "./game.js";
 import { UI } from "./ui.js";
 
 export class EndScreen extends Entity{
-    //TODO Fix double End Screen
     private scoreField : HTMLElement 
     private nextGameButton : HTMLElement
     private ui : UI
@@ -11,11 +10,10 @@ export class EndScreen extends Entity{
     
     constructor(s : number){
         super("endscreen")
-        console.log("We are Doomed");
         const gameElement = document.querySelector('endscreen') as HTMLElement
         this.scoreField = document.createElement("div")
         gameElement.appendChild(this.scoreField)
-        let str = `You Scorred: ${s}`
+        let str = `Your total Score: ${s}`
         this.scoreField.innerHTML = str
 
         this.nextGameButton = document.createElement("button")

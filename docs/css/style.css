@@ -27,19 +27,16 @@ background {
 }
 
 batman{
-    /* TODO Change Batman to Sprite Sheet */
     background-image: url(../images/ss_batman.png);
     width: 58px; height: 77px; 
     text-align: center;
 }
 catwoman{
-    /* TODO Change Batman to Sprite Sheet */
     background-image: url(../images/ss_catwomen.png);
     width: 29px; height: 57px; 
     text-align: center;
 }
 thugs{
-    /* TODO Change Batman to Sprite Sheet */
     background-image: url(../images/ss_thugs_running.png);
     width: 64px; height: 64px; 
     text-align: center;

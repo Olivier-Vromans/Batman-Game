@@ -6,8 +6,11 @@ export class Entity {
     protected animFrames : number = 0
     protected frame : number = 0
     protected frameWidth : number = 0
+    protected frameHeigt : number = 0
+    protected startpos : number = 0
     protected fps : number = 0
     protected row : number = 0
+    protected pos : number = 0
 
 
     constructor(tagName : string) {
