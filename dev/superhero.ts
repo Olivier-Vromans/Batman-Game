@@ -2,7 +2,6 @@ import { Entity } from "./entity.js"
 import { Game } from "./game.js"
 
 export class Superhero extends Entity{
-    entity : Entity
 
     private verticalSpeed : number = 0
     private horizontalSpeed: number = 0
@@ -160,7 +159,7 @@ export class Superhero extends Entity{
     }
 
     private jumpingSprite(){
-        // TODO Jumping sprite
+        // TODO EXTRA Jumping sprite
 
     }
 
@@ -176,16 +175,11 @@ export class Superhero extends Entity{
             this.div.style.width = "87px"
             this.div.style.height = "107px"
         }
-        // TODO Catwoman DeadSprite
+        // TODO EXTRA Catwoman DeadSprite
         if (this.tagName === "catwoman") console.log("Catwoman Running") 
 
-        
-        
 
-        // if(this.fps % 60 == 0) this.stadingSprite()
-
-
-        //TODO After animation is done
+        //TODO EXTRA After animation is done
         // this.dead = false
         // this.x = 100
         // this.y = 200

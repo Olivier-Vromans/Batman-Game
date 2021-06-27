@@ -5,13 +5,6 @@ import { Game } from "./game.js";
 export class Enemy extends Entity {
     private game : Game
 
-    //sprite
-    animFrames = 8
-    frame = 0
-    frameWidth = 64
-    enemyFPS = 0
-
-
     public getBoundingRect() : DOMRect {
         return this.div.getBoundingClientRect()
     }
@@ -22,7 +15,6 @@ export class Enemy extends Entity {
         this.y = 590 //590 for game / 200 for testing
         this.game = g
         this.shoot()
-        // console.log("Enemy was created!")  
         this.update() 
     }
 
@@ -44,17 +36,23 @@ export class Enemy extends Entity {
 
         // Let enemy shoot
         if(this.fps % 60 == 0) this.shoot()
+
+        if(this.fps % 10 == 0) this.frame++
+        if(this.frame > this.animFrames) this.frame = 0
+        this.pos = this.startpos - (this.frame * this.frameWidth)
+        this.div.style.backgroundPosition = `${this.pos}px ${0-this.row*this.frameHeigt}px`     
+
     }
 
-    private runningSprite(){
-        if(this.fps % 5 == 0) this.frame++
-        if(this.frame > this.animFrames) this.frame = 0
-        let pos = 16 - (this.frame * this.frameWidth)
-        this.div.style.backgroundPosition = `${pos}px 0px`
+    private runningSprite(){        
+        this.animFrames = 8
+        this.frameWidth = 64
+        this.frameHeigt = 77
+        this.startpos = 16
     }
 
     private shootingSprite(){
-        
+        //TODO EXTRA Make use of the shooting Sprite
     }
 
     private shoot(){
@@ -63,7 +61,5 @@ export class Enemy extends Entity {
         }
 
     }
-
-
 }
 

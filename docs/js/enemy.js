@@ -3,10 +3,6 @@ import { Entity } from "./entity.js";
 export class Enemy extends Entity {
     constructor(tagName, g) {
         super(tagName);
-        this.animFrames = 8;
-        this.frame = 0;
-        this.frameWidth = 64;
-        this.enemyFPS = 0;
         this.x = window.innerWidth + 20 + Math.random() * 400;
         this.y = 590;
         this.game = g;
@@ -28,14 +24,18 @@ export class Enemy extends Entity {
         this.runningSprite();
         if (this.fps % 60 == 0)
             this.shoot();
-    }
-    runningSprite() {
-        if (this.fps % 5 == 0)
+        if (this.fps % 10 == 0)
             this.frame++;
         if (this.frame > this.animFrames)
             this.frame = 0;
-        let pos = 16 - (this.frame * this.frameWidth);
-        this.div.style.backgroundPosition = `${pos}px 0px`;
+        this.pos = this.startpos - (this.frame * this.frameWidth);
+        this.div.style.backgroundPosition = `${this.pos}px ${0 - this.row * this.frameHeigt}px`;
+    }
+    runningSprite() {
+        this.animFrames = 8;
+        this.frameWidth = 64;
+        this.frameHeigt = 77;
+        this.startpos = 16;
     }
     shootingSprite() {
     }

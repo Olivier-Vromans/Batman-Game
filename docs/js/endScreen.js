@@ -16,7 +16,7 @@ export class EndScreen extends Entity {
     nextGame() {
         this.scoreField.remove();
         this.nextGameButton.remove();
-        this.game = new Game();
+        let game = new Game();
     }
 }
 //# sourceMappingURL=endScreen.js.map
