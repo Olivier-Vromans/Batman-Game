@@ -1,5 +1,4 @@
 import { Superhero } from "./superhero.js";
-import { Entity } from "./entity.js";
 import { Enemy } from "./enemy.js";
 import { Bullet } from "./bullet.js";
 import { UI } from "./ui.js";
@@ -48,7 +47,6 @@ export class Game{
                 this.enemies.push(new Enemy("thugs", this))
             }
         }
-        // this.enemies.update()
 
         //Update Bullets
         for(let b of this.bullets){
@@ -102,7 +100,6 @@ export class Game{
             this.bullets = []
             this.enemies = []
             console.log(this._superheroes.length);
-            
             if (!this.endScreen) {
                 this.endScreen = new EndScreen(this.ui.score) 
             }

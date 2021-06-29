@@ -23,6 +23,4 @@ export class Bullet extends Entity {
         super.update()
     }
 
-
-
 }
